@@ -7,7 +7,8 @@ import stripe
 stripe_keys = {
     "secret_key": os.environ["STRIPE_SECRET_KEY"],
     "publishable_key": os.environ["STRIPE_PUBLISHABLE_KEY"],
-    "price_id": os.environ["STRIPE_PRICE_ID"]
+    "price_id": os.environ["STRIPE_PRICE_ID"],
+    "endpoint_secret": os.environ["STRIPE_ENDPOINT_SECRET"]
 }
 
 stripe.api_key = stripe_keys["secret_key"]
