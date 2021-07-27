@@ -60,6 +60,36 @@ def create_app(test_config=None):
     def cancel():
         return render_template("pages/cancel.html")
 
+    @app.route("/webhook", methods=["POST"])
+    def stripe_webhook():
+        payload = request.get_data(as_text=True)
+        sig_header = request.headers.get("Stripe_Signature")
+
+        try:
+            event = stripe.Webhook.construct_event(
+                payload, sig_header, stripe_keys["endpoint_secret"]
+            )
+        except ValueError as e:
+            #Invalid payload
+            return "Invalid payload", 400
+        except stripe.error.SignatureVerificationError as e:
+            # Invalid signature
+            return "Invalid signature", 400
+        
+        # Handle the checkout.session.completed event
+        if event["type"] == "checkout.session.completed":
+            session = event["data"]["object"]
+
+            # Fullsill the purchase
+            handle_checkout_session(session)
+        
+        return "Success", 200
+    
+    def handle_checkout_session(session):
+        # Here you should fetch the details from the session and save the relevant information
+        # to the database (e.g. associate the user with thier subscription)
+        print("Subscription was successful.")
+
     return app
 
 app = create_app()
