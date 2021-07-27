@@ -1,6 +1,10 @@
 # Mars-Fitness
 Mars Fitness is a gym that uses a subscription based membership. 
 
+> The [Flask Stripe Subscriptions tutorial](https://testdriven.io/blog/flask-stripe-subscriptions/) by Nik Tomazic was used as a guide to integrate Stripe Payment in this application.
+
+[Github Repository](https://github.com/duplxey/flask-stripe-subscriptions)
+
 ## Installing Dependencies
 1. **Python 3.9** - Follow instruction to install the lates version of python for your platform in the [python docs]().
 2. **Virtual Environment** - Creating a virtual environment for the python project is recommended. Refer to the [python docs]().
@@ -67,3 +71,14 @@ $ flask run --reload
 The ```--reload``` flag will detect file changes and restart the server automatically.
 
 The application will be running on port 5000.
+
+## Future Improvements to be made
+
+  - Implement endpoint to fetch subscription data
+    - modify template to display the current plan to subscribed users
+  - Implement user authentication and restrict some routes
+    - Use [Flask-User](https://flask-user.readthedocs.io/en/latest/)
+  - Create a database that holds user subscriptions
+  - Allow users to manage/cancel their current plan
+  - Handle future payment failures
+  - Deploy to Heroku and register webhook endpoints on Stripe
