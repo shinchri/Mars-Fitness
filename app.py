@@ -1,6 +1,16 @@
 from flask import Flask, render_template, request, Response, flash, redirect, url_for, abort
 from flask_sqlalchemy import SQLAlchemy
 from models import setup_db, User
+import os
+import stripe
+
+stripe_keys = {
+    "secret_key": os.environ["STRIPE_SECRET_KEY"],
+    "publishable_key": os.environ["STRIPE_PUBLISHABLE_KEY"],
+    "price_id": os.environ["STRIPE_PRICE_ID"]
+}
+
+stripe.api_key = stripe_keys["secret_key"]
 
 def create_app(test_config=None):
 
