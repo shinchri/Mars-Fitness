@@ -44,7 +44,7 @@ class User(db.Model):
 
 class StripeCustomer(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
     stripeCustomerId = Column(String(255), nullable=False)
     stripeSubscriptionId = Column(String(255), nullable=False)
 
