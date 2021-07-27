@@ -52,6 +52,14 @@ def create_app(test_config=None):
         except Exception as e:
             return jsonify(error=str(e)), 403
 
+    @app.route("/success")
+    def success():
+        return render_template("pages/success.html")
+    
+    @app.route("/cancel")
+    def cancel():
+        return render_template("pages/cancel.html")
+
     return app
 
 app = create_app()
