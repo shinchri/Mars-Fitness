@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Response, flash, redirect, url_for, abort
+from flask import Flask, render_template, request, Response, flash, redirect, url_for, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from models import setup_db, User
 import os
@@ -20,6 +20,11 @@ def create_app(test_config=None):
     @app.route('/')
     def home():
         return render_template('pages/home.html')
+
+    @app.route("/config")
+    def get_publishable_key():
+        stripe_config = {"publicKey": stripe_keys["publishable_key"]}
+        return jsonify(stripe_config)
 
     return app
 
